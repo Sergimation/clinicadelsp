@@ -1,0 +1,39 @@
+{% extends 'home.html' %}
+
+{% block content %}
+    {% block titulo %}
+        <h1>{{ datos.name }}</h1>
+    {% endblock %}
+
+    {% block contenido %}
+        <div id='imatge'>
+            <h2>Imatge</h2>
+            <img src='{{ MEDIA_URL }}{{ datos.image }}'>
+        </div>
+        <div id='preu'>
+            <h2>Preu</h2>
+            <p>{{ datos.price }}</p>
+        </div>
+        <div id='imatge'>
+            <h2>Descripció</h2>
+            <p>{{ datos.description }}</p>
+        </div>
+        <a href='{% url "review_create" %}'><button class="w3-button w3-grey"style="height: 1cm; width: 2cm; margin-bottom: 3%">Comment</button></a>
+        <div id='comentarios'>
+            <h2>Comentarios</h2>
+            {% for item in comentarios %}
+                <p>{{ item.rating }}</p>
+                <p>{{ item.comment }}</p>
+                <p>{{ item.date }}</p>
+
+            {% empty %}
+                <p>Sin comentarios registrados</p>
+            {% endfor %}
+        </div>
+        <footer>
+            <p>Registrado {{ product.register_time|date:'SHORT_DATETIME_FORMAT' }} por {{ product.cart }}</p>
+        </footer>
+    {% endblock %}
+{% endblock %}
+
+
